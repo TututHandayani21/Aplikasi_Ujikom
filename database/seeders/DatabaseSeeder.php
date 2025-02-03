@@ -13,11 +13,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Untuk Memanggil TaskListSeeder & TasskSeeder
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        $this->call(TaskListSeeder::class); 
+        $this->call(TaskSeeder::class);
     }
 }

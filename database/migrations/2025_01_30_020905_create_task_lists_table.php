@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    //up() → Berisi kode untuk membuat tabel users dengan kolom id, name, email, password, dan timestamps.
+    public function up(): void
+    {
+        //Membuat Table Task Lists
+        Schema::create('task_lists', function (Blueprint $table) {
+            $table->id();
+            $table->string('name')->unique();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    //down() → Berisi kode untuk menghapus tabel users jika perlu membatalkan migration (rollback).
+    public function down(): void
+    {
+        Schema::dropIfExists('task_lists');
+    }
+};
