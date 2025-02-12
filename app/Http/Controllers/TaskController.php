@@ -12,6 +12,7 @@ class TaskController extends Controller
     public function index() {
         $data = [
             'title' => 'Home',
+            'test'  => 'Apa yah' ,
             'lists' => TaskList::all(),
             'tasks' => Task::orderBy('created_at', 'desc')->get(),
             'priorities' => Task::PRIORITIES
@@ -23,11 +24,15 @@ class TaskController extends Controller
     public function store(Request $request) {
         $request->validate([
             'name' => 'required|max:100',
+            'description'=> 'required|max:100',
+            'priority' => 'required|in:low,medium,high',
             'list_id' => 'required'
         ]);
                 //Menambahkan Database
         Task::create([
             'name' => $request->name,
+            'description' => $request->description,
+            'priority' => $request->priority,
             'list_id' => $request->list_id
         ]);
 
@@ -43,10 +48,23 @@ class TaskController extends Controller
                 //Mengembalikan ke halaman sebelum'nya
         return redirect()->back();
     }
-
+            //digunakan untuk menghapus data berdasarkan ID-nya dari database
     public function destroy($id) {
+                //berfungsi untuk mencari data dalam tabel tasks berdasarkan ID yang diberikan dan kemudian menghapusnya
         Task::findOrFail($id)->delete();
 
+                //Mengembalikan ke halaman sebelum'nya
         return redirect()->back();
     }
+    public function show($id) {
+        $task = Task::findOrfail($id);
+
+        $data = [
+            'title' => 'Details',
+            'task' => $task,
+        ];
+        
+        return view('pages.details', $data);
+    }
 }
+    

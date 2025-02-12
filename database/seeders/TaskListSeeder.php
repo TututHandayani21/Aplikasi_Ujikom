@@ -23,6 +23,9 @@ class TaskListSeeder extends Seeder
             ],
             [
                 'name' => 'Tugas',
+            ],
+            [
+                'name' => 'FERI',
             ]
         ];
 

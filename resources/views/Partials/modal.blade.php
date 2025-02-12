@@ -15,8 +15,8 @@
                       </div>
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                      <button type="submit" class="btn btn-primary">Tambah</button>
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                      <button type="submit" class="btn btn-warning">Tambah</button>
                   </div>
               </form>
           </div>
@@ -38,10 +38,23 @@
                           <input type="text" class="form-control" id="name" name="name"
                               placeholder="Masukkan nama list">
                       </div>
+                      <div class="mb-3">
+                        <label for="description" class="form-label">Deskripsi</label>
+                        <input type="text" class="form-control" id="description" name="description"
+                            placeholder="Masukkan nama list">
+                    </div>
+                    <div class="mb-3">
+                        <label for="priority" class="form-label">Priority</label>
+                        <select class="form-select form-select" aria-label="small select example" id="priority" name="priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                          </select>
+                    </div>
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                      <button type="submit" class="btn btn-primary">Tambah</button>
+                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                      <button type="submit" class="btn btn-warning">Tambah</button>
                   </div>
               </form>
           </div>

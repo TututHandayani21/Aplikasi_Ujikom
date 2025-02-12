@@ -65,6 +65,13 @@ class TaskSeeder extends Seeder
                 'priority' => 'high',
                 'list_id' => TaskList::where('name', 'Tugas')->first()->id,
             ],
+            [
+                'name' => 'ferii',
+                'description' => 'Membuat project Todo App untuk ujikom',
+                'is_completed' => false,
+                'priority' => 'high',
+                'list_id' => TaskList::where('name', 'FERI')->first()->id,
+            ],
         ];
 
         Task::insert($tasks);

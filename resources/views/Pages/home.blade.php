@@ -1,21 +1,21 @@
-{{--  --}}
 @extends('layouts.app')
 
 @section('content')
-    <div id="content" class="overflow-y-hidden overflow-x-hidden">
+    <div id="content" class="d-flex vh-100 overflow-hidden p-3">
         @if ($lists->count() == 0)
-            <div class="d-flex flex-column align-items-center">
+            <div class="d-flex flex-column align-items-center justify-content-center flex-grow-1">
                 <p class="fw-bold text-center">Belum ada tugas yang ditambahkan</p>
-                <button type="button" class="btn btn-sm d-flex align-items-center gap-2 btn-outline-primary"
-                    style="width: fit-content;">
+                <button type="button" class="btn btn-sm d-flex align-items-center gap-2 btn-outline-primary">
                     <i class="bi bi-plus-square fs-3"></i> Tambah
                 </button>
             </div>
         @endif
-        <div class="d-flex gap-3 px-3 flex-nowrap overflow-x-scroll overflow-y-hidden" style="height: 100vh;">
-            @foreach ($lists as $list)
-                <div class="card flex-shrink-0" style="width: 18rem; max-height: 80vh;">
-                    <div class="card-header d-flex align-items-center justify-content-between">
+        <div class="d-flex gap-3 px-3 flex-nowrap flex-grow-1 overflow-x-scroll" style="white-space: nowrap;">
+            {{-- Pengulangan Data --}}
+            @foreach ($lists as $list) 
+                <div class="card flex-shrink-0 bg-secondary d-flex flex-column"
+                    style="width: 20rem; height: 80%; max-height: 120%;">
+                    <div class=" bg-warning card-header d-flex align-items-center justify-content-between">
                         <h4 class="card-title">{{ $list->name }}</h4>
                         <form action="{{ route('lists.destroy', $list->id) }}" method="POST" style="display: inline;">
                             @csrf
@@ -25,24 +25,22 @@
                             </button>
                         </form>
                     </div>
-                    <div class="card-body d-flex flex-column gap-2 overflow-x-hidden">
+                    <div class="card-body d-flex flex-column gap-2 flex-grow-1 overflow-auto">
                         @foreach ($tasks as $task)
                             @if ($task->list_id == $list->id)
                                 <div class="card">
                                     <div class="card-header">
                                         <div class="d-flex align-items-center justify-content-between">
                                             <div class="d-flex flex-column justify-content-center gap-2">
-                                                <p
+                                                <a href="{{ route('tasks.show' , $task->id)}}"
                                                     class="fw-bold lh-1 m-0 {{ $task->is_completed ? 'text-decoration-line-through' : '' }}">
                                                     {{ $task->name }}
-                                                </p>
-                                                <span class="badge text-bg-{{ $task->priorityClass }} badge-pill"
-                                                    style="width: fit-content">
+                                                </a>
+                                                <span class="badge text-bg-{{ $task->priorityClass }} badge-pill">
                                                     {{ $task->priority }}
                                                 </span>
                                             </div>
-                                            <form action="{{ route('tasks.destroy', $task->id) }}" method="POST"
-                                                style="display: inline;">
+                                            <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-sm p-0">
@@ -61,33 +59,28 @@
                                             <form action="{{ route('tasks.complete', $task->id) }}" method="POST">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" class="btn btn-sm btn-primary w-100">
+                                                <button type="submit" class="btn btn-sm btn-warning w-100">
                                                     <span class="d-flex align-items-center justify-content-center">
-                                                        <i class="bi bi-check fs-5"></i>
-                                                        Selesai
+                                                        <i class="bi bi-check fs-5">Selesai</i>
                                                     </span>
                                                 </button>
                                             </form>
-
                                         </div>
                                     @endif
                                 </div>
                             @endif
                         @endforeach
-                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-sm btn-outline-light" data-bs-toggle="modal"
                             data-bs-target="#addTaskModal" data-list="{{ $list->id }}">
-                            <span class="d-flex align-items-center justify-content-center">
-                                <i class="bi bi-plus fs-5"></i>
-                                Tambah
-                            </span>
+                                <i class="bi bi-plus fs-5">Tambah </i>
                         </button>
                     </div>
-                    <div class="card-footer d-flex justify-content-between align-items-center">
+                    <div class="card-footer bg-warning d-flex justify-content-between align-items-center">
                         <p class="card-text">{{ $list->tasks->count() }} Tugas</p>
                     </div>
                 </div>
             @endforeach
-            <button type="button" class="btn btn-outline-primary flex-shrink-0" style="width: 18rem; height: fit-content;"
+            <button type="button" class="btn btn-outline-warning flex-shrink-0" style="width: 18rem; height: fit-content;"
                 data-bs-toggle="modal" data-bs-target="#addListModal">
                 <span class="d-flex align-items-center justify-content-center">
                     <i class="bi bi-plus fs-5"></i>
