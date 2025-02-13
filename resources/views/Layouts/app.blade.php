@@ -14,10 +14,10 @@
 </head>
 
 <body>                                                      
-    @include('partials.navbar') <!-- Mengambil component navbar -->
-    {{-- @include('partials.sidebar') <!-- Mengambil component navbar --> --}}
+    @include('partials.navbar') <!-- Mengambil component Navbar -->
+    @include('partials.sidebar') <!-- Mengambil component Sidebar -->
 
-    @yield('content') <!-- Render content -->
+    {{-- @yield('content') <!-- Render content --> --}}
 
     @include('partials.modal')
 

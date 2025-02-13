@@ -134,11 +134,29 @@
                     display: flex;
                     justify-content: center;
                    }
-                   /* Sidebar */
-
-                   /* Content /
                    
                    /* Content */
+                   #content {
+                    position: relative;
+                    width: calc(100% - 280px);
+                    left:280px ;
+                   }
+                   /* Content */
+                   /* Navbar */
+                   #content nav {
+                    height: 56px;
+                    background: var(--light);
+                    padding: 0 24px;
+                    align-items: center;
+                    grid-gap: 24px;
+                    font-display: var(--lato)
+                   }
+                   #content nav a {
+                    color: var(--dark);
+                   }
+                   #content nav .bx bx-menu
+                   /* Navbar */
+                   /* Sidebar */
           </style>
 </head>
 <body>
@@ -197,6 +215,29 @@
           </section>
           {{-- Sidebar --}}
 
+          {{-- Conten --}}
+          <section id="content">
+                    {{-- Navabr --}}
+                    <nav>
+                              <i class='bx bx-menu h2'></i>
+                              <a href="#" class="nav-link">Categories</a>
+                              <form action="#">
+                                        <div class="form-input">
+                                        <input type="search" placeholder="search...">
+                                        <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                                        </div>
+                              </form>
+                              <a href="#" class="notification">
+                                        <i class='bx bxs-bell'></i>
+                                        <span class="num">8</span>
+                              </a>
+                              <a href="#">
+                                        <img src="img/people.png">
+                              </a>
+                    </nav>
+                    {{-- Navbar --}}
+          </section>
+          {{-- Conten --}}
           <script src="script.js"></script>
 </body>
 </html>
