@@ -154,7 +154,68 @@
                    #content nav a {
                     color: var(--dark);
                    }
-                   #content nav .bx bx-menu
+                   #content nav .bx.bx-menu {
+                    cursor: pointer;
+                   }
+                   #content nav .nav-link {
+                    font-size: 16px;
+                    transition: .3s ease;
+                   }
+                   #content nav .nav-link:hover {
+                    color: var(--blue);
+                   }
+                   #content nav form {
+                    max-width: 400px;
+                    width: 100%;
+                    margin-right: auto;
+                   }
+                   #content nav form .form-input {
+                    display: flex;
+                    align-items: center;
+                    height: 36px;
+                   }
+                   #content nav form .form-input  input {
+                    flex-grow: 1;
+                    padding: 0 16px;
+                    height: 100%;
+                    border: none;
+                    background: var(--grey);
+                    border-radius: 36 0 0 36;
+                    outline: none;
+                   }
+                   #content nav form .form-input button {
+                    width: 36px;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: var(--blue);
+                    font-size: 18px;
+                    border: none;
+                    outline: none;
+                    border-radius: 0 36px 36px 0;
+                    cursor: pointer;
+                   }
+                   #content nav .notification {
+                    font-size: 20px;
+                    position: relative
+                   }
+                   #content nav .notification .num {
+                    position: absolute;
+                    top: -6px;
+                    right: -6px;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    border: 2px solid var(--light);
+                    background: var(--red);
+                    color: var(--light);
+                    font-weight: 700%;
+                    font-size: 12px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                   }
                    /* Navbar */
                    /* Sidebar */
           </style>
