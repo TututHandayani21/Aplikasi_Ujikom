@@ -88,6 +88,9 @@
                     background: var(--grey);
                     position: relative;
                    }
+                   #sidebar .side-menu li.active a {
+                    color: var(--blue);
+                   }
                    #sidebar .side-menu li.active::before {
                     content: '';
                     position: absolute;
@@ -120,7 +123,10 @@
                     font-size: 16px;
                     color: var(--dark);
                    }
-                   #sidebar .side-menu li a:hover {
+                   #sidebar .side-menu li a .logout {
+                    color: var(--red);
+                   }
+                   #sidebar .side-menu.top li a:hover {
                     color: var(--blue)
                    }
                    #sidebar .side-menu li a .bx {
@@ -129,6 +135,10 @@
                     justify-content: center;
                    }
                    /* Sidebar */
+
+                   /* Content /
+                   
+                   /* Content */
           </style>
 </head>
 <body>
@@ -178,7 +188,7 @@
                                         </a>
                               </li>
                               <li>
-                                        <a href="#">
+                                        <a href="#" class="loguot">
                                                   <i class='bx bxs-log-out-circle'></i>
                                                   <span class="text">Loguot</span>
                                         </a>

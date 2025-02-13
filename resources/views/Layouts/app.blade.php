@@ -15,7 +15,7 @@
 
 <body>                                                      
     @include('partials.navbar') <!-- Mengambil component navbar -->
-    @include('partials.sidebar') <!-- Mengambil component navbar -->
+    {{-- @include('partials.sidebar') <!-- Mengambil component navbar --> --}}
 
     @yield('content') <!-- Render content -->
 
