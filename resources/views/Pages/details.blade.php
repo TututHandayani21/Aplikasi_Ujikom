@@ -1,111 +1,83 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id="content" class="container pb-3">
-        <div class="d-flex aligh-items-center justify-content center">
-            <a href="{{ route('home') }}" class="btn btn-sm fw-bold fs-4">
-                <i class="bi bi-arrow-left-short"></i>
-                kembali
-            </a>
-        </div>
-        @session('success')
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        @endsession
-        <div class="row">
-            <div class="col-8">
-                <div class="card" style="height: 80vh; max-height: 80vh;">
-                    {{-- kode untuk ukuran lebar panjangnya --}}
-                    <div class="card-header d-flex align items center justify-content-between overflow-hidden">
-                        <h3 class="fw-bold fs-4 text-truncate" style="max-width: 80%;">{{ $task->name }}</h3>
-                        <span class="fs-6 fw-medium">
-                            di {{ $task->list->name}}
-                        </span>
-                        <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                        data-bs-target="#editTaskModal">
-                        <i class="bi bi-pencil-square"></i>
+    @extends('layouts.app')
+
+@section('content')
+    <div id="content" class="d-flex vh-100 overflow-hidden p-3">
+        <div class="d-flex gap-3 px-3 flex-nowrap flex-grow-1 overflow-x-scroll" style="white-space: nowrap;">
+            {{-- Pengulangan Data --}}
+            <div class="card flex-shrink-0 bg-secondary d-flex flex-column"
+                style="width: 20rem; height: 80%; max-height: 120%;">
+                <div class=" bg-primary card-header d-flex align-items-center justify-content-between">
+                    <h4 class="card-title">{{ $list->name }}</h4>
+                    <form action="{{ route('lists.destroy', $list->id) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-sm p-0">
+                            <i class="bi bi-trash fs-5 text-danger"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="card-body d-flex flex-column gap-2 flex-grow-1 overflow-auto">
+                    @foreach ($list->tasks as $task)
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <div class="d-flex flex-column justify-content-center gap-2">
+                                        <a href="{{ route('tasks.show', $task->id) }}"
+                                            class="fw-bold lh-1 m-0 {{ $task->is_completed ? 'text-decoration-line-through' : '' }}">
+                                            {{ $task->name }}
+                                        </a>
+                                        <span class="badge text-bg-{{ $task->priorityClass }} badge-pill">
+                                            {{ $task->priority }}
+                                        </span>
+                                    </div>
+                                    <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm p-0">
+                                            <i class="bi bi-x-circle text-danger fs-5"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text text-truncate">
+                                    {{ $task->description }}
+                                </p>
+                            </div>
+                            @if (!$task->is_completed)
+                                <div class="card-footer">
+                                    <form action="{{ route('tasks.complete', $task->id) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="btn btn-sm btn-primary w-100">
+                                            <span class="d-flex align-items-center justify-content-center">
+                                                <i class="bi bi-check fs-5">Selesai</i>
+                                            </span>
+                                        </button>
+                                    </form>
+                                </div>
+                            @endif
+                        </div>
+                    @endforeach
+                    <button type="button" class="btn btn-sm btn-outline-light" data-bs-toggle="modal"
+                        data-bs-target="#addTaskModal" data-list="{{ $list->id }}">
+                        <i class="bi bi-plus fs-5">Tambah </i>
                     </button>
-                    </div>
-                    <div class="card-body">
-                        <p>
-                            {{ $task->description }}
-                        </p>
-                    </div>
-                    <div class="card-footer">
-                        <form action="{{ route ('tasks.destroy', $task->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn btn-outline-danger w-100">
-                                Hapus
-                            </button>
-                        </form>
-                    </div>
+                </div>
+                <div class="card-footer bg-primary d-flex justify-content-between align-items-center">
+                    <p class="card-text">{{ $list->tasks->count() }} Tugas</p>
                 </div>
             </div>
-            <div class="col-4">
-                <div class="card" style="height: 80vh; max-height: 80vh;">
-                    <div class="card-header d-flex align-items-center justify-content-between overflow-hidden">
-                        <h3 class="fw-bold fs-4 text-truncate mb-0" style="width: 80%">Details</h3>
-                    </div>
-                    <div class="card-body d-flex flex-column gap-2">
-                        <form action="{{ route('tasks.changeList', $task->id) }}" method="POST">
-                            @csrf
-                            @method('PATCH')
-                            <select class="form-select" name="list_id" onchange="this.form.submit()">
-                                @foreach ($lists as $list)
-                                    <option value="{{ $list->id }}" {{ $list->id == $task->list_id ? 'selected' : '' }}>
-                                        {{ $list->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </form>
-                        <h6 class="fs-6">
-                            Priotitas:
-                            <span class="badge text-bg-{{ $task->priorityClass }} badge-pill" style="width: fit-content">
-                                {{ $task->priority }}
-                            </span>
-                        </h6>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="editTaskModal" tabindex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <form action="{{ route('tasks.update', $task->id) }}" method="POST" class="modal-content">
-                    @method('PUT')
-                    @csrf
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="editTaskModalLabel">Edit Task</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="text" value="{{ $task->list_id }}" name="list_id" hidden>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Nama</label>
-                            <input type="text" class="form-control" id="name" name="name"
-                                value="{{ $task->name }}" placeholder="Masukkan nama list">
-                        </div>
-                        <div class="mb-3">
-                            <label for="description" class="form-label">Deskripsi</label>
-                            <textarea class="form-control" name="description" id="description" rows="3" placeholder="Masukkan deskripsi">{{ $task->description }}</textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="priority" class="form-label">Priority</label>
-                            <select class="form-control" name="priority" id="priority">
-                                <option value="low" @selected($task->priority == 'low')>Low</option>
-                                <option value="medium" @selected($task->priority == 'medium')>Medium</option>
-                                <option value="high" @selected($task->priority == 'high')>High</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                    </div>
-                </form>
-            </div>
+            <button type="button" class="btn btn-outline-primary flex-shrink-0" style="width: 18rem; height: fit-content;"
+                data-bs-toggle="modal" data-bs-target="#addListModal">
+                <span class="d-flex align-items-center justify-content-center">
+                    <i class="bi bi-plus fs-5"></i>
+                    Tambah
+                </span>
+            </button>
         </div>
     </div>
 @endsection

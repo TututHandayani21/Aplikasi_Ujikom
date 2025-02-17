@@ -11,13 +11,14 @@
     <!-- Import bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/bootstrap-icons/font/bootstrap-icons.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
-<body>                                                      
+<body>
     @include('partials.navbar') <!-- Mengambil component Navbar -->
     @include('partials.sidebar') <!-- Mengambil component Sidebar -->
 
-    {{-- @yield('content') <!-- Render content --> --}}
+    @yield('content') <!-- Render content -->
 
     @include('partials.modal')
 

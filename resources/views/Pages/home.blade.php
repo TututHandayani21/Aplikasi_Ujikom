@@ -15,7 +15,7 @@
             @foreach ($lists as $list) 
                 <div class="card flex-shrink-0 bg-secondary d-flex flex-column"
                     style="width: 20rem; height: 80%; max-height: 120%;">
-                    <div class=" bg-warning card-header d-flex align-items-center justify-content-between">
+                    <div class=" bg-primary card-header d-flex align-items-center justify-content-between">
                         <h4 class="card-title">{{ $list->name }}</h4>
                         <form action="{{ route('lists.destroy', $list->id) }}" method="POST" style="display: inline;">
                             @csrf
@@ -59,7 +59,7 @@
                                             <form action="{{ route('tasks.complete', $task->id) }}" method="POST">
                                                 @csrf
                                                 @method('PATCH')
-                                                <button type="submit" class="btn btn-sm btn-warning w-100">
+                                                <button type="submit" class="btn btn-sm btn-primary w-100">
                                                     <span class="d-flex align-items-center justify-content-center">
                                                         <i class="bi bi-check fs-5">Selesai</i>
                                                     </span>
@@ -75,12 +75,12 @@
                                 <i class="bi bi-plus fs-5">Tambah </i>
                         </button>
                     </div>
-                    <div class="card-footer bg-warning d-flex justify-content-between align-items-center">
+                    <div class="card-footer bg-primary d-flex justify-content-between align-items-center">
                         <p class="card-text">{{ $list->tasks->count() }} Tugas</p>
                     </div>
                 </div>
             @endforeach
-            <button type="button" class="btn btn-outline-warning flex-shrink-0" style="width: 18rem; height: fit-content;"
+            <button type="button" class="btn btn-outline-primary flex-shrink-0" style="width: 18rem; height: fit-content;"
                 data-bs-toggle="modal" data-bs-target="#addListModal">
                 <span class="d-flex align-items-center justify-content-center">
                     <i class="bi bi-plus fs-5"></i>
