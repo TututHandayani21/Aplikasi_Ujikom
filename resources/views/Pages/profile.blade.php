@@ -21,11 +21,14 @@
                         Handayani</span></h1>
                 <h2 data-aos="fade-left" data-aos-duration="1000" data-aos-delay="800">I'm a <span>This is the story of
                         the lasht Child</span></h2>
-                <p data-aos="flip-up" data-aos-duration="1000" data-aos-delay="1000">?</p>
+                        <h3 data-aos="fade-left" data-aos-duration="1000" data-aos-delay="800"><span>Indramayu,20 Juni 2006</span></h3>
+                <div>
+                    <h3 data-aos="fade-left" data-aos-duration="1000" data-aos-delay="1000">Hallo aku adalah anak terakhir dari 4 bersaudara, Harapan terakhir keluarga meskipun itu sulit untuk aku, tapi aku selalu berusaha yang terbaik untuk mengangkat darjat orang tua.</h3>
+                </div>
                 <div class="social-links" data-aos="flip-down" data-aos-duration="1000" data-aos-delay="1200">
-                    <a href="#"><i class="fa-brands fa-github"></i></a>
-                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
                     <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
                     <a href="#"><i class="fa-brands fa-telegram"></i></a>
                 </div>
                 <div class="btn" data-aos="zoom-out-left" data-aos-duration="1000" data-aos-delay="1300">
