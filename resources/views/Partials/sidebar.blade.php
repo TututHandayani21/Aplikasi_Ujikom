@@ -1,103 +1,30 @@
-<section id="sidebar">
+<!-- Sidebar untuk navigasi aplikasi -->
+<section id="sidebar"> 
+    <!-- Logo atau brand aplikasi -->
     <a href="#" class="brand">
-        <i class='bx bx-receipt h1'></i>
-        <span class="text">To Do List</span>
+        <i class='bx bx-receipt h1'></i> <!-- Ikon logo -->
+        <span class="text">To Do List</span> <!-- Nama aplikasi -->
     </a>
+
+    <!-- Menu navigasi utama -->
     <ul class="side-menu top">
+        <!-- Item menu untuk Dashboard -->
         <li class="{{ $title === 'Home' ? 'active' : '' }}">
             <a href="{{ route('home') }}">
-                <i class='bx bxs-dashboard '></i>
+                <i class='bx bxs-dashboard'></i> <!-- Ikon dashboard -->
                 <span class="text">Dashboard</span>
             </a>
         </li>
+
+        <!-- Looping melalui daftar list yang ada dan menampilkannya di sidebar -->
         @foreach ($lists as $list)
             <li class="{{ $title === $list->name ? 'active' : '' }}">
                 <a href="{{ route('lists.show', $list->id) }}">
-                    <i class='bx bxs-dashboard '></i>
-                    <span class="text">{{ $list->name }}</span>
+                    <i class='bx bxs-dashboard'></i> <!-- Ikon untuk list -->
+                    <span class="text">{{ $list->name }}</span> <!-- Nama list -->
                 </a>
             </li>
         @endforeach
     </ul>
-
 </section>
-<!-- SIDEBAR -->
-
-<script>
-    const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
-
-    allSideMenu.forEach(item => {
-        const li = item.parentElement;
-
-        item.addEventListener('click', function() {
-            allSideMenu.forEach(i => {
-                i.parentElement.classList.remove('active');
-            })
-            li.classList.add('active');
-        })
-    });
-
-
-
-
-    // TOGGLE SIDEBAR
-    const menuBar = document.querySelector('#content nav .bx.bx-menu');
-    const sidebar = document.getElementById('sidebar');
-
-    menuBar.addEventListener('click', function() {
-        sidebar.classList.toggle('hide');
-    })
-
-
-
-
-
-
-
-    const searchButton = document.querySelector('#content nav form .form-input button');
-    const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
-    const searchForm = document.querySelector('#content nav form');
-
-    searchButton.addEventListener('click', function(e) {
-        if (window.innerWidth < 576) {
-            e.preventDefault();
-            searchForm.classList.toggle('show');
-            if (searchForm.classList.contains('show')) {
-                searchButtonIcon.classList.replace('bx-search', 'bx-x');
-            } else {
-                searchButtonIcon.classList.replace('bx-x', 'bx-search');
-            }
-        }
-    })
-
-
-
-
-
-    if (window.innerWidth < 768) {
-        sidebar.classList.add('hide');
-    } else if (window.innerWidth > 576) {
-        searchButtonIcon.classList.replace('bx-x', 'bx-search');
-        searchForm.classList.remove('show');
-    }
-
-
-    window.addEventListener('resize', function() {
-        if (this.innerWidth > 576) {
-            searchButtonIcon.classList.replace('bx-x', 'bx-search');
-            searchForm.classList.remove('show');
-        }
-    })
-
-
-
-    const switchMode = document.getElementById('switch-mode');
-
-    switchMode.addEventListener('change', function() {
-        if (this.checked) {
-            document.body.classList.add('dark');
-        } else {
-            document.body.classList.remove('dark');
-        }
-    })
-</script>
+<!-- Akhir Sidebar -->
