@@ -2,12 +2,14 @@
 
 @section('content')
     <div id="content" class="container pb-3">
+        {{-- Tombol kembali ke halaman utama --}}
         <div class="d-flex aligh-items-center justify-content center">
             <a href="{{ route('home') }}" class="btn btn-sm fw-bold fs-4">
                 <i class="bi bi-arrow-left-short"></i>
                 kembali
             </a>
         </div>
+        {{-- Menampilkan notifikasi sukses jika ada --}}
         @session('success')
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 {{ session('success') }}
@@ -17,7 +19,7 @@
         <div class="row">
             <div class="col-8">
                 <div class="card" style="height: 80vh; max-height: 80vh;">
-                    {{-- kode untuk ukuran lebar panjangnya --}}
+                    {{-- Header card yang menampilkan nama tugas dan tombol edit --}}
                     <div class="card-header d-flex align items center justify-content-between overflow-hidden">
                         <h3 class="fw-bold fs-4 text-truncate" style="max-width: 80%;">{{ $task->name }}</h3>
                         <span class="fs-6 fw-medium">
@@ -28,11 +30,13 @@
                         <i class="bi bi-pencil-square"></i>
                     </button>
                     </div>
+                    {{-- Menampilkan deskripsi tugas --}}
                     <div class="card-body">
                         <p>
                             {{ $task->description }}
                         </p>
                     </div>
+                    {{-- Tombol hapus tugas --}}
                     <div class="card-footer">
                         <form action="{{ route ('tasks.destroy', $task->id) }}" method="POST">
                             @csrf
@@ -46,9 +50,11 @@
             </div>
             <div class="col-4">
                 <div class="card" style="height: 80vh; max-height: 80vh;">
+                    {{-- Header detail tugas --}}
                     <div class="card-header d-flex align-items-center justify-content-between overflow-hidden">
                         <h3 class="fw-bold fs-4 text-truncate mb-0" style="width: 80%">Details</h3>
                     </div>
+                    {{-- Bagian untuk mengubah daftar tugas dan menampilkan prioritas --}}
                     <div class="card-body d-flex flex-column gap-2">
                         <form action="{{ route('tasks.changeList', $task->id) }}" method="POST">
                             @csrf
@@ -71,6 +77,7 @@
                 </div>
             </div>
         </div>
+        {{-- Modal untuk mengedit tugas --}}
         <div class="modal fade" id="editTaskModal" tabindex="-1" aria-labelledby="editTaskModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <form action="{{ route('tasks.update', $task->id) }}" method="POST" class="modal-content">
@@ -81,16 +88,19 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
+                        {{-- Input untuk mengedit nama tugas --}}
                         <input type="text" value="{{ $task->list_id }}" name="list_id" hidden>
                         <div class="mb-3">
                             <label for="name" class="form-label">Nama</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ $task->name }}" placeholder="Masukkan nama list">
                         </div>
+                        {{-- Input untuk mengedit deskripsi tugas --}}
                         <div class="mb-3">
                             <label for="description" class="form-label">Deskripsi</label>
                             <textarea class="form-control" name="description" id="description" rows="3" placeholder="Masukkan deskripsi">{{ $task->description }}</textarea>
                         </div>
+                        {{-- Pilihan prioritas tugas --}}
                         <div class="mb-3">
                             <label for="priority" class="form-label">Priority</label>
                             <select class="form-control" name="priority" id="priority">
