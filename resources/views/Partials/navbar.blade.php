@@ -18,7 +18,16 @@
                 </div>
             </div>
         </form>
-
+            <div>
+                 {{-- Tombol untuk menambahkan daftar tugas baru --}}
+            <button type="button" class="btn btn-outline-primary flex-shrink-0" style="width: 18rem; height: fit-content;"
+            data-bs-toggle="modal" data-bs-target="#addListModal">
+            <span class="d-flex align-items-center justify-content-center">
+                <i class="bi bi-plus fs-5"></i>
+                Tambah
+            </span>
+        </button>
+            </div>
         <!-- Link menuju halaman profil pengguna -->
         <a href="{{route('profile')}}" class="profile">
             <!-- Menampilkan gambar profil -->
