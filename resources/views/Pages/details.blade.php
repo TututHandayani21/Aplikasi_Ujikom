@@ -6,7 +6,7 @@
             {{-- Pengulangan Data untuk Setiap List --}}
             <div class="card flex-shrink-0 bg-secondary d-flex flex-column"
                 style="width: 20rem; height: 80%; max-height: 120%;">
-                
+
                 {{-- Header Card Menampilkan Nama List dan Tombol Hapus --}}
                 <div class=" bg-primary card-header d-flex align-items-center justify-content-between">
                     <h4 class="card-title">{{ $list->name }}</h4>
@@ -18,7 +18,7 @@
                         </button>
                     </form>
                 </div>
-                
+
                 {{-- Bagian Body Card Menampilkan Daftar Tugas --}}
                 <div class="card-body d-flex flex-column gap-2 flex-grow-1 overflow-auto">
                     @foreach ($list->tasks as $task)
